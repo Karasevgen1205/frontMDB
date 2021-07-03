@@ -1,0 +1,15 @@
+.headerWrapper{
+    display: flex;
+    justify-content: space-between;
+    background-color: cadetblue;
+    flex-direction: row;
+    grid-area: header;
+}
+.leftSide{
+    padding-left: 10px;
+}
+.rightSide{
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+}

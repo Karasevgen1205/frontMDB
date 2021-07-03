@@ -1,0 +1,7 @@
+.globalWrapper{
+    display: grid;
+    grid-template-areas:
+    "header header"
+    "aside content";
+    grid-template-columns: 2fr 12fr;
+}
