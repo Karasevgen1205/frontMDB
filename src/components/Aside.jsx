@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./Aside.module.css"
+import {NavLink} from "react-router-dom";
 
 export const Aside = () => {
     return (
         <aside className={styles.asideWrapper}>
-            <div>Profile</div>
-            <div>menu2</div>
-            <div>menu3</div>
+            <NavLink className={styles.menuBtn} a to='/profile'>My profile</NavLink>
+            <NavLink className={styles.menuBtn} a to='/users'>Users</NavLink>
         </aside>
     )
 };

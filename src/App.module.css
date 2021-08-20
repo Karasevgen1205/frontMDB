@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@700&display=swap');
 .globalWrapper{
     display: grid;
     grid-template-areas:
     "header header"
     "aside content";
     grid-template-columns: 2fr 12fr;
+    font-family: 'Hahmlet', serif;
 }

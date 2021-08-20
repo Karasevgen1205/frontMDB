@@ -1,9 +1,11 @@
 .headerWrapper{
     display: flex;
     justify-content: space-between;
-    background-color: cadetblue;
+    background-color: #274070;
     flex-direction: row;
     grid-area: header;
+    color: #ffffff;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
 }
 .leftSide{
     padding-left: 10px;
@@ -12,4 +14,24 @@
     padding-right: 10px;
     display: flex;
     align-items: center;
+}
+.btnRed{
+    padding: 10px;
+    background-color: #dc004e;
+    color: #ffffff;
+    border: 3px #dc004e;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.6s ease;
+    margin-right: 5px;
+}
+.btnRed:hover{
+    background-color: #dc4781;
+}
+
+.btnRed:active{
+    background-color: #ffffff;
+    color: #dc004e;
+    border: 3px #dc4781;
 }

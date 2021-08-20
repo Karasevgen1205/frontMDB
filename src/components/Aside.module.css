@@ -1,5 +1,23 @@
 .asideWrapper{
     grid-area: aside;
-    height: 50vh;
-    padding: 10px 0px 0px 10px;
+    height: 90vh;
+    padding: 0px 0px 0px 10px;
+    background-color: #9dbaf2;
+    color: #ffffff;
+}
+.menuBtn{
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffffff;
+    border-radius: 10px;
+    border: solid 2px #9dbaf2;
+    padding: 10px;
+    width: 100px;
+    margin-top: 15px;
+}
+.menuBtn:hover{
+    color: #3d3c87;
+    border: solid 2px #5c5dff;
+    background-color: white;
 }
