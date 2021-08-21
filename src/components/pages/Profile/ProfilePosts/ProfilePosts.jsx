@@ -1,14 +1,11 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {useDispatch} from "react-redux";
-import {sendPost} from "../../../../redux/profile-reducer";
-
 
 export const ProfilePosts = () => {
 
-    const dispatch = useDispatch();
+
     const {register, handleSubmit} = useForm();
-    const onSubmit = data => dispatch(sendPost(data.postText));
+    const onSubmit = data => console.log(data)
 
     return (
         <div>

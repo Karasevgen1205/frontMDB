@@ -7,12 +7,7 @@ import {getAvatarUrl} from "../../../../redux/selectors";
 
 export const ProfileAvaStatus = () => {
 
-    const dispatch = useDispatch();
-    const avatarUrl = useSelector(getAvatarUrl);
-
-    useEffect(()=>{
-        dispatch(getProfileData())
-    }, [avatarUrl]);
+/*    const dispatch = useDispatch();
 
     const uplAva = (profileImg) => {
         dispatch(uploadAvatar(profileImg))
@@ -22,15 +17,15 @@ export const ProfileAvaStatus = () => {
         if (e.target.files.length) {
             uplAva(e.target.files[0])
         }
-    };
+    };*/
 
     return (
         <div>
             <p>Hello </p>
             <div >
-                <img src={avatarUrl} className={style.ava}/>
+                <img className={style.ava}/>
             </div>
-            <input onChange={avatarSelected} type="file" name="profileImg"/>
+            <input type="file" name="profileImg"/>
         </div>
     )
 };
