@@ -58,11 +58,19 @@ export const userAPI = {
             }
         });
     },
-    sendPost(textPost) {
-        return instance.post(`post`, {textPost});
+    async sendPost(textPost) {
+        const {data} = await instance.post(`post`, {textPost});
+        return data;
     },
     getProfileData() {
         return instance.get(`profile`);
+    },
+    async getPosts() {
+        const {data} = await instance.get(`userposts`);
+        return data;
+    },
+    async deletePost(postID) {
+        const data = await instance.delete(`post?postId=${postID}`)
     }
 
 };

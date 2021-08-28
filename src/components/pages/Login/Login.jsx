@@ -1,23 +1,48 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useForm} from "react-hook-form";
-import styles from "./Login.module.css"
+import styles from "./Login.module.css";
+import {Context} from "../../../index";
+import {authAPI} from "../../../DAL/API";
+import {Redirect} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+import {Loader} from "../../common/Loader";
 
-export const Login = () => {
+export const Login = observer( () => {
+
+    const {user} = useContext(Context);
 
     const {register, handleSubmit} = useForm();
-    const onSubmit = data => console.log(data)
+    const onSubmit = async (data) => {
+        try{
+            user.setPreload(true);
+            const response = await authAPI.login(data.email, data.password);
+            user.setIsAuth(true);
+            user.setPreload(false);
+        } catch(e) {
+            user.setPreload(false);
+            console.log(e)
+        }
+
+    };
+
+    if (user.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
 
     return (
         <div>
-            <div className={styles.wrapper}>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-                    <input className={styles.input} placeholder="Email" {...register("email")} />
-                    <br/>
-                    <input className={styles.input} placeholder="Password" type="password" {...register("password")}/>
-                    <br/>
-                    <input className={styles.btnBlue} type="submit" value="Login"/>
-                </form>
-            </div>
+            {user.preload ? <Loader/> :
+                <div className={styles.wrapper}>
+                    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                        <input className={styles.input} placeholder="Email" {...register("email")} />
+                        <br/>
+                        <input className={styles.input} placeholder="Password"
+                               type="password" {...register("password")}/>
+                        <br/>
+                        <input className={styles.btnBlue} type="submit" value="Login"/>
+                    </form>
+                </div>
+            }
         </div>
     )
-}
+});

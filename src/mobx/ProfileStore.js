@@ -3,36 +3,60 @@ import {makeAutoObservable} from "mobx";
 export default class ProfileStore {
     constructor() {
         this._isAuth = false;
+        this._isReg = false;
+        this._preload = false;
         this._userName = "";
         this._avaUrl = "";
         this._posts = [];
 
         makeAutoObservable(this)
     }
+
     setIsAuth(bool) {
         this._isAuth = bool;
     }
+
+    setIsReg(bool) {
+        this._isReg = bool;
+    }
+
     setUserName(userName) {
         this._userName = userName;
     }
+
     setAvaUrl(avaUrl) {
         this._avaUrl = avaUrl;
     }
+
     setPosts(posts) {
         this._posts = posts;
     }
 
-    getIsAuth() {
+    setPreload(bool) {
+        this._preload = bool;
+    }
+
+    get isAuth() {
         return this._isAuth
     }
-    getUserName() {
+
+    get isReg() {
+        return this._isReg
+    }
+
+    get userName() {
         return this._userName
     }
-    getAvaUrl() {
+
+    get avaUrl() {
         return this._avaUrl
     }
-    getPosts() {
+
+    get posts() {
         return this._posts
     }
 
+    get preload() {
+        return this._preload
+    }
 }
