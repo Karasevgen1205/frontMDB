@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styles from "./App.module.css"
 import {Header} from "./components/Header";
 import {Aside} from "./components/Aside";
@@ -14,6 +14,8 @@ const App = observer(() => {
 
     const {user} = useContext(Context);
 
+    const [preloadValue, setPreloadValue] = useState(false);
+
     const checkAuth = async () => {
         const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
         localStorage.setItem('token', response.data.accessToken);
@@ -21,12 +23,12 @@ const App = observer(() => {
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
-            user.setPreload(true);
+            setPreloadValue(true)
             checkAuth().then(data => {
                 user.setIsAuth(true);
             }, reason => {
-                user.setIsAuth(false);
-            }).finally(() => user.setPreload(false))
+                setPreloadValue(false)
+            }).finally(() => setPreloadValue(false))
         }
     }, []);
 
@@ -35,7 +37,7 @@ const App = observer(() => {
             <div className={styles.globalWrapper}>
                 <Header/>
                 <Aside/>
-                {user.preload ? <Loader/> : <Content/>}
+                {preloadValue ? <Loader/> : <Content/>}
             </div>
         </BrowserRouter>
     )

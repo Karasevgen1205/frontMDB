@@ -1,9 +1,14 @@
 .asideWrapper{
     grid-area: aside;
+    width:10%;
+    margin-top: 7vh;
     height: 90vh;
     padding: 0px 0px 0px 10px;
     background-color: #9dbaf2;
     color: #ffffff;
+    position: fixed;
+    min-width: 160px;
+    z-index: 0;
 }
 .menuBtn{
     display: block;

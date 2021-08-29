@@ -1,8 +1,9 @@
 import React, {useContext, useEffect} from "react";
 import style from "./ProfileAvaStatus.module.css";
-import {userAPI} from "../../../../DAL/API";
+import {profileAPI} from "../../../../DAL/API";
 import {Context} from "../../../../index";
 import {observer} from "mobx-react-lite";
+import {Loader} from "../../../common/Loader";
 
 
 export const ProfileAvaStatus = observer(() => {
@@ -13,7 +14,7 @@ export const ProfileAvaStatus = observer(() => {
 
     const uplAva = async (profileImg) => {
         try {
-            let response = await userAPI.uploadAvatar(profileImg);
+            let response = await profileAPI.uploadAvatar(profileImg);
             return response.data
         } catch (e) {
             console.log(e)
@@ -29,7 +30,7 @@ export const ProfileAvaStatus = observer(() => {
     };
 
     const getProfileData = async () => {
-        return await userAPI.getProfileData()
+        return await profileAPI.getProfileData()
     };
 
     useEffect(() => {
@@ -44,10 +45,14 @@ export const ProfileAvaStatus = observer(() => {
     return (
         <div>
             <p>Hello {userName}</p>
-            <div>
-                <img src={avatar} className={style.ava}/>
-            </div>
-            <input onChange={avatarSelected} type="file" name="profileImg"/>
+            {user.preload ? <Loader/> :
+                <>
+                    <div>
+                        <img src={avatar} className={style.ava}/>
+                    </div>
+                    <input onChange={avatarSelected} type="file" name="profileImg"/>
+                </>
+            }
         </div>
     )
 });

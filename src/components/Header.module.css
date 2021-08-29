@@ -1,11 +1,14 @@
 .headerWrapper{
     display: flex;
+    width: 100%;
     justify-content: space-between;
     background-color: #274070;
     flex-direction: row;
     grid-area: header;
     color: #ffffff;
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+    position: fixed;
+    z-index: 1;
 }
 .leftSide{
     padding-left: 10px;

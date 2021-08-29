@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import {useForm} from "react-hook-form";
-import {userAPI} from "../../../../DAL/API";
+import {profileAPI} from "../../../../DAL/API";
 import {Context} from "../../../../index";
 import {observer} from "mobx-react-lite";
 import PostItem from "./PostItem";
@@ -9,16 +9,17 @@ export const ProfilePosts = observer( () => {
 
     const {user} = useContext(Context);
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
 
     const onSubmit = async (data) => {
-        const res = await userAPI.sendPost(data.postText);
-        const newPosts = await userAPI.getPosts();
+        const res = await profileAPI.sendPost(data.postText);
+        reset()
+        const newPosts = await profileAPI.getPosts();
         user.setPosts(newPosts.posts)
     };
 
     useEffect(()=>{
-       userAPI.getPosts().then(res => {
+       profileAPI.getPosts().then(res => {
            user.setPosts(res.posts);
        })
     }, []);

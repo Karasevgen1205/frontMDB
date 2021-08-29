@@ -1,6 +1,7 @@
 import * as axios from "axios"
 
-export const API_URL = `http://localhost:3001/api`
+export const API_URL = `http://localhost:3001/api`;
+export const URL_AVA = `http://localhost:3001/`;
 
 const instance = axios.create({
     baseURL: API_URL,
@@ -34,8 +35,6 @@ instance.interceptors.response.use((config) => {
     throw error;
 });
 
-
-
 export const authAPI = {
     register(email, password, user_name) {
         return instance.post(`register`, {email, password, user_name});
@@ -48,7 +47,7 @@ export const authAPI = {
     }
 };
 
-export const userAPI = {
+export const profileAPI = {
     uploadAvatar(profileImg) {
         const formData = new FormData();
         formData.append("profileImg", profileImg);
@@ -70,8 +69,17 @@ export const userAPI = {
         return data;
     },
     async deletePost(postID) {
-        const data = await instance.delete(`post?postId=${postID}`)
+        const data = await instance.delete(`post?postId=${postID}`);
+        return data;
+    },
+    async updatePost(postID, postText) {
+        const data = await instance.put(`post?postId=${postID}`, {postText});
+        return data;
     }
-
 };
 
+export const userAPI = {
+    getUsers() {
+        return instance.get(`users`);
+    }
+};
