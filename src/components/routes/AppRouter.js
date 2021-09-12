@@ -6,12 +6,12 @@ import {observer} from "mobx-react-lite";
 
 const AppRouter = observer( () => {
 
-    const {user} = useContext(Context);
+    const {profile} = useContext(Context);
 
     return (
         <Switch>
             <Redirect exact from="/" to="/profile" />
-            {user.isAuth && authRoutes.map(({path, Component}) =>
+            {profile.isAuth && authRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} component={Component} exect/>
             )}
             {publicRoutes.map(({path, Component}) =>

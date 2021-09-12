@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ProfileStore from "./mobx/ProfileStore";
+import UserStore from "./mobx/UserStore";
 
 export const Context = createContext(null);
 
 ReactDOM.render(
     <Context.Provider value={{
-        user: new ProfileStore()
+        profile: new ProfileStore(),
+        users: new UserStore()
     }}>
         <App/>
     </Context.Provider>,

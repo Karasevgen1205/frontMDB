@@ -7,3 +7,7 @@
     grid-template-columns: 2fr 12fr;
     font-family: 'Hahmlet', serif;
 }
+.loaderWrapper{
+    margin-left: 100%;
+    margin-top: 50px;
+}

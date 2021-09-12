@@ -1,8 +1,8 @@
 .asideWrapper{
     grid-area: aside;
     width:10%;
-    margin-top: 7vh;
-    height: 90vh;
+    margin-top: 50px;
+    height: 100%;
     padding: 0px 0px 0px 10px;
     background-color: #9dbaf2;
     color: #ffffff;

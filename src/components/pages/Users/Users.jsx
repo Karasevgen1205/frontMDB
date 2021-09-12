@@ -7,28 +7,30 @@ import UserItem from "./UserItem";
 
 export const Users = observer(() => {
 
-    const {user} = useContext(Context);
-
-    const getUsers = async () => {
-        return await userAPI.getUsers()
-    };
+    const {users} = useContext(Context);
+    const [preloadValue, setPreloadValue] = useState(false);
 
     useEffect(() => {
-        user.setPreload(true)
-        getUsers().then(res => {
-            user.setUsers(res.data.users);
-            user.setPreload(false);
+        setPreloadValue(true)
+        userAPI.getUsers().then(res => {
+            users.setUsers(res.data.allUsers);
+            setPreloadValue(false);
         }).finally(() => {
-            user.setPreload(false)
+            setPreloadValue(false)
         })
     }, []);
-
-    const allUsers = user.users;
 
     return (
         <div>
             <p>Users</p>
-            {allUsers.map(u => <UserItem key={u.email} avaUrl={u.file_name} userName={u.user_name} email={u.email}/>)}
+            {preloadValue ? <Loader/> :
+                users.users.map(u => <UserItem
+                    key={u.email}
+                    isFriend={u.isFriend}
+                    id={u.user_id}
+                    avaUrl={u.file_name}
+                    userName={u.user_name}
+                    email={u.email}/>)}
         </div>
     )
 });

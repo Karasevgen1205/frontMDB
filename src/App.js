@@ -12,7 +12,7 @@ import {Loader} from "./components/common/Loader";
 
 const App = observer(() => {
 
-    const {user} = useContext(Context);
+    const {profile} = useContext(Context);
 
     const [preloadValue, setPreloadValue] = useState(false);
 
@@ -25,7 +25,7 @@ const App = observer(() => {
         if (localStorage.getItem("token")) {
             setPreloadValue(true)
             checkAuth().then(data => {
-                user.setIsAuth(true);
+                profile.setIsAuth(true);
             }, reason => {
                 setPreloadValue(false)
             }).finally(() => setPreloadValue(false))
@@ -37,7 +37,7 @@ const App = observer(() => {
             <div className={styles.globalWrapper}>
                 <Header/>
                 <Aside/>
-                {preloadValue ? <Loader/> : <Content/>}
+                {preloadValue ? <div className={styles.loaderWrapper}><Loader/></div> : <Content/>}
             </div>
         </BrowserRouter>
     )

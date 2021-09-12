@@ -81,5 +81,11 @@ export const profileAPI = {
 export const userAPI = {
     getUsers() {
         return instance.get(`users`);
+    },
+    follow(friendId) {
+        return instance.get(`follow?friendId=${friendId}`)
+    },
+    unfollow(friendId) {
+        return instance.get(`unfollow?friendId=${friendId}`)
     }
 };

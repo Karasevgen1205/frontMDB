@@ -9,29 +9,29 @@ import {Loader} from "../../common/Loader";
 
 export const Login = observer( () => {
 
-    const {user} = useContext(Context);
+    const {profile} = useContext(Context);
 
     const {register, handleSubmit} = useForm();
     const onSubmit = async (data) => {
         try{
-            user.setPreload(true);
+            profile.setPreload(true);
             const response = await authAPI.login(data.email, data.password);
-            user.setIsAuth(true);
-            user.setPreload(false);
+            profile.setIsAuth(true);
+            profile.setPreload(false);
         } catch(e) {
-            user.setPreload(false);
+            profile.setPreload(false);
             console.log(e)
         }
 
     };
 
-    if (user.isAuth) {
+    if (profile.isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
     return (
         <div>
-            {user.preload ? <Loader/> :
+            {profile.preload ? <Loader/> :
                 <div className={styles.wrapper}>
                     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                         <input className={styles.input} placeholder="Email" {...register("email")} />

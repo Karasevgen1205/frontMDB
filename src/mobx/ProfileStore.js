@@ -8,7 +8,6 @@ export default class ProfileStore {
         this._userName = "";
         this._avaUrl = "";
         this._posts = [];
-        this._users = [];
 
         makeAutoObservable(this)
     }
@@ -36,9 +35,6 @@ export default class ProfileStore {
     setPreload(bool) {
         this._preload = bool;
     }
-    setUsers(users) {
-        this._users = users;
-    }
 
     get isAuth() {
         return this._isAuth
@@ -63,7 +59,5 @@ export default class ProfileStore {
     get preload() {
         return this._preload
     }
-    get users() {
-        return this._users
-    }
+
 }

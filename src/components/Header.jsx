@@ -7,12 +7,12 @@ import {authAPI} from "../DAL/API";
 
 export const Header = observer(() => {
 
-    const {user} = useContext(Context);
+    const {profile} = useContext(Context);
 
     const logOut = async () => {
         try {
             const response = await authAPI.logout();
-            user.setIsAuth(false)
+            profile.setIsAuth(false)
         } catch (e) {
             console.log(e)
         }
@@ -24,7 +24,7 @@ export const Header = observer(() => {
                 <p>Test SPA</p>
             </div>
             <div className={style.rightSide}>
-                {user.isAuth ? <button className={style.btnRed} onClick={logOut}>LogOut</button> :
+                {profile.isAuth ? <button className={style.btnRed} onClick={logOut}>LogOut</button> :
                     <>
                         <NavLink to='/register'>
                             <button className={style.btnRed}>Register</button>
