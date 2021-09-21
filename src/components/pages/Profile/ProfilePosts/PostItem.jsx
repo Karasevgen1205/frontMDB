@@ -5,7 +5,7 @@ import {Context} from "../../../../index";
 
 const PostItem = (props) => {
 
-    const {user} = useContext(Context);
+    const {profile} = useContext(Context);
     const [editValue, setEditValue] = useState(false);
     const [areaText, setAreaText] = useState(props.text);
 
@@ -18,7 +18,7 @@ const PostItem = (props) => {
 
     const getPosts = async () => {
         const newPosts = await profileAPI.getPosts();
-        user.setPosts(newPosts.posts);
+        profile.setPosts(newPosts.posts);
     };
     const deletePost = async (postId) => {
         try {
@@ -36,7 +36,7 @@ const PostItem = (props) => {
             await getPosts();
             return response
         } catch(e) {
-
+            console.log(e)
         }
     };
 

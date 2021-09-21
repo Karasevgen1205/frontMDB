@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import defaultAvatar from '../../../assets/images/noAvatar.png';
 import style from "./UserItem.module.css";
-import styles from "../Register/Register.module.css";
+import styles from "../LoginRegister/LoginRegister.module.css";
 import {observer} from "mobx-react-lite";
 import {URL_AVA, userAPI} from "../../../DAL/API";
 import {Context} from "../../../index";

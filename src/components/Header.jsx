@@ -11,7 +11,7 @@ export const Header = observer(() => {
 
     const logOut = async () => {
         try {
-            const response = await authAPI.logout();
+            await authAPI.logout();
             profile.setIsAuth(false)
         } catch (e) {
             console.log(e)

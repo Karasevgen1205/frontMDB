@@ -1,7 +1,6 @@
 import {Profile} from "../pages/Profile/Profile";
 import {Users} from "../pages/Users/Users";
-import {Login} from "../pages/Login/Login";
-import {Register} from "../pages/Register/Register";
+import {LoginRegister} from "../pages/LoginRegister/LoginRegister";
 
 export const authRoutes = [
     {
@@ -17,10 +16,10 @@ export const authRoutes = [
 export const publicRoutes = [
     {
         path: "/login",
-        Component: Login
+        Component: LoginRegister
     },
     {
         path: "/register",
-        Component: Register
+        Component: LoginRegister
     }
 ];
