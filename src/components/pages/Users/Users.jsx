@@ -23,6 +23,7 @@ export const Users = observer(() => {
     return (
         <div>
             <p>Users</p>
+            <input placeholder="enter the name" type="text"/>
             {preloadValue ? <Loader/> :
                 users.users.map(u => <UserItem
                     key={u.email}

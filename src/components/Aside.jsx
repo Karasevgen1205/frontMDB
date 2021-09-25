@@ -7,6 +7,7 @@ export const Aside = () => {
         <aside className={styles.asideWrapper}>
             <NavLink className={styles.menuBtn} a="true" to='/profile'>My profile</NavLink>
             <NavLink className={styles.menuBtn} a="true" to='/users'>Users</NavLink>
+            <NavLink className={styles.menuBtn} a="true" to='/dialogs'>Public Chat</NavLink>
         </aside>
     )
 };

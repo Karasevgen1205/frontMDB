@@ -1,6 +1,7 @@
 import {Profile} from "../pages/Profile/Profile";
 import {Users} from "../pages/Users/Users";
 import {LoginRegister} from "../pages/LoginRegister/LoginRegister";
+import {Dialogs} from "../pages/Dialogs/Dialogs";
 
 export const authRoutes = [
     {
@@ -10,6 +11,10 @@ export const authRoutes = [
     {
         path: "/users",
         Component: Users
+    },
+    {
+        path: "/dialogs",
+        Component: Dialogs
     }
 ];
 
