@@ -5,6 +5,7 @@ import styles from "../LoginRegister/LoginRegister.module.css";
 import {observer} from "mobx-react-lite";
 import {URL_AVA, userAPI} from "../../../DAL/API";
 import {Context} from "../../../index";
+import {Avatar, Button, Comment} from "antd";
 
 const UserItem = observer((props) => {
 
@@ -35,10 +36,20 @@ const UserItem = observer((props) => {
 
     return (
         <div className={style.wrapper}>
-            <p>{props.userName}</p>
-            <img className={style.userAva} src={props.avaUrl === "none" ? defaultAvatar : URL_AVA+props.avaUrl} alt="avatar"/>
-            {props.isFriend == 0 ? <input className={styles.btnBlue} onClick={follow} type="submit" value="Follow"/> :
-            <input className={styles.btnBlue} onClick={unfollow} type="submit" value="UnFollow"/>}
+
+            <Comment
+                author={<a style={{fontSize: 28}}>{props.userName}</a>}
+                avatar={
+                    <img src={props.avaUrl === "none" ? defaultAvatar : URL_AVA + props.avaUrl} alt="avatar" style={{width: '80px', height: '80px'}}/>
+                }
+                content={
+                    <>
+                        {props.isFriend === 0
+                            ? <Button size="large" shape="round" type="primary" onClick={follow}>Follow</Button>
+                            : <Button size="large" shape="round" type="primary" onClick={unfollow}>UnFollow</Button>}
+                    </>
+                }
+            />
         </div>
     );
 });

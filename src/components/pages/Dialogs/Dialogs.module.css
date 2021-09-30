@@ -1,0 +1,8 @@
+.contentWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 500px;
+    height: 500px;
+    box-sizing: border-box;
+}

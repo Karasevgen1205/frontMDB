@@ -1,14 +1,16 @@
 import React, {useContext, useEffect, useState} from "react";
 import styles from "./App.module.css"
-import {Header} from "./components/Header";
+import {MyHeader} from "./components/MyHeader";
 import {Aside} from "./components/Aside";
-import {Content} from "./components/Content";
+import {MyContent} from "./components/MyContent";
 import {BrowserRouter} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import axios from "axios";
 import {API_URL} from "./DAL/API";
 import {Loader} from "./components/common/Loader";
+import {Layout} from 'antd';
+import 'antd/dist/antd.css';
 
 const App = observer(() => {
 
@@ -34,11 +36,19 @@ const App = observer(() => {
 
     return (
         <BrowserRouter>
-            <div className={styles.globalWrapper}>
+            {/*            <div className={styles.globalWrapper}>
                 <Header/>
                 <Aside/>
                 {preloadValue ? <div className={styles.loaderWrapper}><Loader/></div> : <Content/>}
-            </div>
+            </div>*/}
+
+            <Layout className="layout">
+                <MyHeader/>
+                <Layout style={{ minHeight: '100vh' }}>
+                    <Aside/>
+                    {preloadValue ? <div className={styles.loaderWrapper}><Loader/></div> : <MyContent/>}
+                </Layout>
+            </Layout>
         </BrowserRouter>
     )
 });

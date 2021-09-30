@@ -1,13 +1,16 @@
 import React, {useContext, useState} from 'react';
-import style from './PostItem.module.css'
 import {profileAPI} from "../../../../DAL/API";
 import {Context} from "../../../../index";
+import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {Avatar, Button, Card, Form, Input} from "antd";
 
 const PostItem = (props) => {
 
     const {profile} = useContext(Context);
     const [editValue, setEditValue] = useState(false);
     const [areaText, setAreaText] = useState(props.text);
+    const { Meta } = Card;
+    const { TextArea } = Input;
 
     const onEditMenu = () => {
         setEditValue(true)
@@ -40,23 +43,41 @@ const PostItem = (props) => {
         }
     };
 
+
     return (
-        <div className={style.post}>
-            {!editValue ? <>
-                    <button onClick={onEditMenu}>edit</button>
-                    <button onClick={async () => {
-                        await deletePost(props.postId)
-                    }}>delete
-                    </button>
-                    <p>{props.text}</p>
+        <div >
+            {!editValue ?
+                <>
+                    <Card
+                        style={{ width: "100%" }}
+                        actions={[
+                            <EditOutlined onClick={onEditMenu} key="edit" />,
+                            <DeleteOutlined onClick={async () => {
+                                await deletePost(props.postId)
+                            }} key="delete" />
+                        ]}
+                    >
+                        <Meta
+                            avatar={<Avatar src={props.avatar} />}
+                            title={props.userName}
+                            description={props.text}
+                        />
+                    </Card>
+                    <br/>
                 </>
                 :
                 <>
-                    <button onClick={async () => {
-                        await updatePost(props.postId, areaText)
-                    }}>Confirm</button>
-                    <button onClick={offEditMenu}>Cancel</button>
-                    <textarea onChange={(e) => setAreaText(e.currentTarget.value)} value={areaText}></textarea>
+                    <TextArea value={areaText} allowClear onChange={(e) => setAreaText(e.currentTarget.value)} />
+                    <Button
+                        onClick={async () => {await updatePost(props.postId, areaText)}}
+                            size="large" shape="round" type="primary" htmlType="submit" className="login-form-button">
+                        Confirm
+                    </Button>
+                    <Button
+                        onClick={offEditMenu}
+                        size="large" shape="round" type="primary" htmlType="submit" className="login-form-button">
+                        Cancel
+                    </Button>
                 </>
             }
         </div>

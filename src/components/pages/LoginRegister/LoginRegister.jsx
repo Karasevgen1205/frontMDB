@@ -5,6 +5,9 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../../../index";
 import {authAPI} from "../../../DAL/API";
 import {Redirect, useLocation} from "react-router-dom";
+import {Form, Input, Button} from 'antd';
+import {UserOutlined, LockOutlined} from '@ant-design/icons';
+import 'antd/dist/antd.css';
 
 export const LoginRegister = observer(() => {
 
@@ -36,25 +39,63 @@ export const LoginRegister = observer(() => {
     }
 
     return (
-        <div>
-            <div className={styles.wrapper}>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmitReg)}>
-                    <input className={styles.input} placeholder="Email" {...register("email")} />
-                    <br/>
 
-                    {location === "/register" && <> <input className={styles.input}
-                                                           placeholder="NickName" {...register("user_name")} />
-                        <br/> </>}
+        <div className={styles.wrapper}>
+            <Form
+                name="normal_login"
+                className="login-form"
+                onFinish={handleSubmit(onSubmitReg)}
+            >
+                <Form.Item
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Email!',
+                        },
+                    ]}
+                >
+                    <Input {...register("email")} prefix={<UserOutlined className="site-form-item-icon"/>}
+                           placeholder="Email"/>
+                </Form.Item>
 
-                    <input className={styles.input} placeholder="Password" type="password" {...register("password")}/>
-                    <br/>
+                {location === "/register" &&
+                <Form.Item
+                    name="userName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Username!',
+                        },
+                    ]}
+                >
+                    <Input {...register("user_name")} prefix={<UserOutlined className="site-form-item-icon"/>}
+                           placeholder="Username"/>
+                </Form.Item>}
 
-                    <input className={styles.btnBlue} type="submit"
-                           value={location === "/register" ? "Register" : "Login"}/>
-
-                    {profile.isReg && <p>Register is Success. Now log in</p>}
-                </form>
-            </div>
+                <Form.Item
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Password!',
+                        },
+                    ]}
+                >
+                    <Input
+                        prefix={<LockOutlined className="site-form-item-icon"/>}
+                        type="password"
+                        placeholder="Password"
+                        {...register("password")}
+                    />
+                </Form.Item>
+                <Form.Item>
+                    <Button size="large" shape="round" type="primary" htmlType="submit" className="login-form-button">
+                        {location === "/register" ? "Register" : "Log In"}
+                    </Button>
+                </Form.Item>
+                {profile.isReg && <p>Register is Success. Now log in</p>}
+            </Form>
         </div>
     )
 });

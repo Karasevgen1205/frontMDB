@@ -1,6 +1,11 @@
-import React, {useRef, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
+import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
+import styles from "./Dialogs.module.css"
 
-export const Dialogs = () => {
+export const Dialogs = observer(() => {
+
+    const {profile} = useContext(Context);
 
     const [inputVal, setInputVal] = useState("");
     const [msgArr, setMsgArr] = useState([]);
@@ -32,6 +37,8 @@ export const Dialogs = () => {
     const sendMsg = async () => {
         const message = {
             event: "message",
+            id: new Date(),
+            userName: profile.userName,
             message: inputVal
         }
         socket.current.send(JSON.stringify(message))
@@ -46,9 +53,9 @@ export const Dialogs = () => {
     }
 
     return (
-        <div>
+        <div className={styles.contentWrapper}>
             <div>
-                {msgArr.map(msg => <div key={msg.message}>{msg.message}</div>)}
+                {msgArr.map(msg => <div key={msg.id}><b>{msg.userName} : </b>{msg.message}</div> )}
             </div>
             <div>
                 <input value={inputVal} onChange={e => setInputVal(e.target.value)} type="text"/>
@@ -56,4 +63,4 @@ export const Dialogs = () => {
             </div>
         </div>
     );
-};
+});
