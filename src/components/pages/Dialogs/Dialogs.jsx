@@ -18,7 +18,8 @@ export const Dialogs = observer(() => {
             console.log("socket connected");
             setConnected(true);
             const message = {
-                event: "connection"
+                event: "connection",
+                userName: profile.userName
             };
             socket.current.send(JSON.stringify(message))
         };
@@ -33,18 +34,26 @@ export const Dialogs = observer(() => {
             console.log("Error")
         }
     }
-    
+
     const sendMsg = async () => {
         const message = {
             event: "message",
             id: new Date(),
             userName: profile.userName,
             message: inputVal
-        }
-        socket.current.send(JSON.stringify(message))
+        };
+        socket.current.send(JSON.stringify(message));
+        setInputVal("")
     };
 
-    if(!connected) {
+    const messageSort = msgArr.slice().sort(function(a, b) {
+        return a.id - b.id;
+    });
+
+    console.log(msgArr);
+    console.log(messageSort);
+
+    if (!connected) {
         return (
             <div>
                 <button onClick={connect}>login in chat</button>
@@ -55,7 +64,13 @@ export const Dialogs = observer(() => {
     return (
         <div className={styles.contentWrapper}>
             <div>
-                {msgArr.map(msg => <div key={msg.id}><b>{msg.userName} : </b>{msg.message}</div> )}
+                {messageSort.map(msg =>
+                    <div key={msg.id}>
+                        {msg.event === "connection"
+                            ? <div>Пользователь <b> {msg.userName} </b> присоединился</div>
+                            : <div><b>{msg.userName} : </b>{msg.message}</div>
+                        }
+                    </div>)}
             </div>
             <div>
                 <input value={inputVal} onChange={e => setInputVal(e.target.value)} type="text"/>

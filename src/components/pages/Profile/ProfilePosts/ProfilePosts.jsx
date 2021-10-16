@@ -12,17 +12,14 @@ export const ProfilePosts = observer(() => {
     const avatar = profile.avaUrl;
     const userName = profile.userName;
 
-    const {register, handleSubmit, reset} = useForm();
+    const {register, handleSubmit} = useForm();
     const [form] = Form.useForm();
 
 
     const onSubmit = async (data) => {
-        const res = await profileAPI.sendPost(data.postText);
+        await profileAPI.sendPost(data.postText);
         const newPosts = await profileAPI.getPosts();
         profile.setPosts(newPosts.posts)
-    };
-    const onReset = () => {
-        form.resetFields();
     };
 
     useEffect(() => {
@@ -32,6 +29,10 @@ export const ProfilePosts = observer(() => {
     }, []);
 
     const userPosts = profile.posts;
+    console.log(userPosts)
+    const postsSort = userPosts.slice().sort(function(a, b) {
+        return b.post_id - a.post_id;
+    });
 
     return (
         <div>
@@ -43,17 +44,17 @@ export const ProfilePosts = observer(() => {
                 <Form.Item
                     name="postText"
                 >
-                    <Input size="large" {...register("postText")}/>
+                    <Input  size="large" {...register("postText")}/>
                 </Form.Item>
                 <Form.Item>
-                    <Button onClick={onReset} size="large" shape="round" type="primary" htmlType="submit" className="login-form-button">
+                    <Button onClick={form.setFieldsValue({ postText: '' })} size="large" shape="round" type="primary" htmlType="submit" className="login-form-button">
                         Send
                     </Button>
                 </Form.Item>
             </Form>
             <div>
-                {userPosts.map(p => <PostItem key={p.post_id} userName={userName} avatar={avatar} postId={p.post_id} text={p.post_text}/>)}
+                {postsSort.map(p => <PostItem key={p.post_id} userName={userName} avatar={avatar} postId={p.post_id} text={p.post_text}/>)}
             </div>
         </div>
     )
-});
+})
