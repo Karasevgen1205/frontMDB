@@ -24,8 +24,12 @@ export const Users = observer(() => {
 
 
     const searchedUsers = useMemo(() => {
-        return users.users.filter(user => user.user_name.toLowerCase().includes(searchValue.toLowerCase()))
-    }, [searchValue, users]);
+        if(searchValue === "") {
+            return users.users
+        } else {
+            return users.users.filter(user => user.user_name.toLowerCase().includes(searchValue.toLowerCase()))
+        }
+    }, [searchValue, users.users]);
 
     return (
         <div>

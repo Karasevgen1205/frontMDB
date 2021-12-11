@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import {Layout, Menu} from 'antd';
-import {UserOutlined, UsergroupAddOutlined, MessageOutlined} from '@ant-design/icons';
+import {UserOutlined, UsergroupAddOutlined, CommentOutlined, CustomerServiceOutlined} from '@ant-design/icons';
 
 export const Aside = () => {
 
@@ -16,8 +16,11 @@ export const Aside = () => {
                 <Menu.Item key="2" icon={<UsergroupAddOutlined />}>
                     <NavLink a="true" to='/users'>Users</NavLink>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<MessageOutlined />}>
+                <Menu.Item key="3" icon={<CommentOutlined />}>
                     <NavLink a="true" to='/dialogs'>Public Chat</NavLink>
+                </Menu.Item>
+                <Menu.Item key="4" icon={<CustomerServiceOutlined />}>
+                    <NavLink a="true" to='/music'>Music</NavLink>
                 </Menu.Item>
             </Menu>
         </Sider>

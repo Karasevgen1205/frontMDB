@@ -2,6 +2,7 @@ import {Profile} from "../pages/Profile/Profile";
 import {Users} from "../pages/Users/Users";
 import {LoginRegister} from "../pages/LoginRegister/LoginRegister";
 import {Dialogs} from "../pages/Dialogs/Dialogs";
+import {Music} from "../pages/Music/Music";
 
 export const authRoutes = [
     {
@@ -15,6 +16,10 @@ export const authRoutes = [
     {
         path: "/dialogs",
         Component: Dialogs
+    },
+    {
+        path: "/music",
+        Component: Music
     }
 ];
 

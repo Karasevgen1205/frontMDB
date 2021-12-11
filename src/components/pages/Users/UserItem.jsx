@@ -1,11 +1,10 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import defaultAvatar from '../../../assets/images/noAvatar.png';
 import style from "./UserItem.module.css";
-import styles from "../LoginRegister/LoginRegister.module.css";
 import {observer} from "mobx-react-lite";
 import {URL_AVA, userAPI} from "../../../DAL/API";
 import {Context} from "../../../index";
-import {Avatar, Button, Comment} from "antd";
+import {Button, Comment} from "antd";
 
 const UserItem = observer((props) => {
 

@@ -89,3 +89,9 @@ export const userAPI = {
         return instance.get(`unfollow?friendId=${friendId}`)
     }
 };
+
+export const musicAPI = {
+    getMusic() {
+        return instance.get(`music`);
+    }
+};

@@ -50,9 +50,6 @@ export const Dialogs = observer(() => {
         return a.id - b.id;
     });
 
-    console.log(msgArr);
-    console.log(messageSort);
-
     if (!connected) {
         return (
             <div>

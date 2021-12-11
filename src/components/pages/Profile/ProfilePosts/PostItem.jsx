@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {profileAPI} from "../../../../DAL/API";
 import {Context} from "../../../../index";
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {DeleteFilled, EditFilled} from "@ant-design/icons";
 import {Avatar, Button, Card, Form, Input} from "antd";
 
 const PostItem = (props) => {
@@ -51,8 +51,8 @@ const PostItem = (props) => {
                     <Card
                         style={{ width: "100%" }}
                         actions={[
-                            <EditOutlined onClick={onEditMenu} key="edit" />,
-                            <DeleteOutlined onClick={async () => {
+                            <EditFilled onClick={onEditMenu} key="edit" />,
+                            <DeleteFilled onClick={async () => {
                                 await deletePost(props.postId)
                             }} key="delete" />
                         ]}
@@ -61,6 +61,7 @@ const PostItem = (props) => {
                             avatar={<Avatar src={props.avatar} />}
                             title={props.userName}
                             description={props.text}
+                            style={{ color: "black" }}
                         />
                     </Card>
                     <br/>
