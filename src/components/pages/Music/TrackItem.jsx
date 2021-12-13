@@ -6,8 +6,6 @@ import {URL_AVA} from "../../../DAL/API";
 
 export const TrackItem = (props) => {
 
-    let audio = new Audio();
-
     const myRef = useRef();
 
     const [isPlay, setIsPlay] = useState(false);
