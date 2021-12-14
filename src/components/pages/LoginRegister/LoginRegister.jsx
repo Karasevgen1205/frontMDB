@@ -94,7 +94,7 @@ export const LoginRegister = observer(() => {
                         {location === "/register" ? "Register" : "Log In"}
                     </Button>
                 </Form.Item>
-                {profile.isReg && <p>Register is Success. Now log in</p>}
+                {profile.isReg && <p style={{color: "green"}}>Register is Success. Now log in</p>}
             </Form>
         </div>
     )

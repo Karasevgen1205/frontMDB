@@ -1,5 +1,5 @@
 import React from "react";
-import preloader from "../../assets/images/RingLoaderNoBck.svg";
+import preloader from "../../assets/images/DoubleRing.svg";
 import style from "./Loader.module.css"
 
 export const Loader = () => {

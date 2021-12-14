@@ -1,7 +1,7 @@
 import React, {useContext, useRef, useState} from 'react';
 import {Context} from "../../../index";
 import {observer} from "mobx-react-lite";
-import styles from "./Dialogs.module.css"
+import {Button, Card, Col, Row} from "antd";
 
 export const Dialogs = observer(() => {
 
@@ -13,7 +13,8 @@ export const Dialogs = observer(() => {
     const [connected, setConnected] = useState(false);
 
     function connect() {
-        socket.current = new WebSocket("ws://localhost:5000");
+        /*socket.current = new WebSocket("ws://localhost:5000");*/
+        socket.current = new WebSocket("ws://62.113.99.202:5000");
         socket.current.onopen = () => {
             console.log("socket connected");
             setConnected(true);
@@ -52,27 +53,33 @@ export const Dialogs = observer(() => {
 
     if (!connected) {
         return (
-            <div>
-                <button onClick={connect}>login in chat</button>
+            <div style={{display: "flex", justifyContent: "center"}}>
+                <Button onClick={connect} type="primary">enter the chat</Button>
             </div>
         )
     }
 
     return (
-        <div className={styles.contentWrapper}>
-            <div>
-                {messageSort.map(msg =>
-                    <div key={msg.id}>
-                        {msg.event === "connection"
-                            ? <div>Пользователь <b> {msg.userName} </b> присоединился</div>
-                            : <div><b>{msg.userName} : </b>{msg.message}</div>
-                        }
-                    </div>)}
-            </div>
-            <div>
-                <input value={inputVal} onChange={e => setInputVal(e.target.value)} type="text"/>
-                <button onClick={sendMsg}>send message</button>
-            </div>
-        </div>
+        <Row>
+            <Col span={24}>
+                <div style={{minHeight: "500px", height: "500px", overflowY:"scroll", display: "flex", flexDirection: "column", justifyContent: "end"}}>
+                    {messageSort.map(msg =>
+                        <Col style={{minHeight:"50px"}} key={msg.id}>
+                            {msg.event === "connection"
+                                ? <Card >Пользователь <b> {msg.userName} </b> присоединился</Card>
+                                : <Card><b>{msg.userName} : </b>{msg.message}</Card>
+                            }
+                        </Col>)}
+                </div>
+                <Row style={{marginTop:"10px"}}>
+                    <Col span={20}>
+                        <input style={{width:"100%"}} value={inputVal} onChange={e => setInputVal(e.target.value)} type="text"/>
+                    </Col>
+                    <Col span={4}>
+                        <Button style={{width:"100%"}} type="primary" onClick={sendMsg}>send message</Button>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     );
 });

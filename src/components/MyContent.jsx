@@ -4,7 +4,7 @@ import {Layout} from "antd";
 
 export const MyContent = () => {
 
-    const { Content} = Layout;
+    const {Content} = Layout;
 
     return (
             <Layout >

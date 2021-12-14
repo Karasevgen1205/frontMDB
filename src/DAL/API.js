@@ -1,7 +1,12 @@
 import * as axios from "axios"
+import React from "react";
+import {Redirect} from "react-router-dom";
 
-export const API_URL = `http://localhost:3001/api`;
-export const URL_AVA = `http://localhost:3001/`;
+/*export const API_URL = `http://localhost:3001/api`;
+export const URL_AVA = `http://localhost:3001/`;*/
+
+export const API_URL = `http://62.113.99.202:3001/api`;
+export const URL_AVA = `http://62.113.99.202:3001/`;
 
 const instance = axios.create({
     baseURL: API_URL,
@@ -29,7 +34,7 @@ instance.interceptors.response.use((config) => {
             localStorage.setItem('token', response.data.accessToken)
             return instance.request(originalRequest)
         } catch (e) {
-            console.log("не авторизован")
+            return <Redirect to={"/login"}/>
         }
     }
     throw error;
