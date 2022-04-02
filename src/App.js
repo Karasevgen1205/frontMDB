@@ -28,7 +28,6 @@ const App = observer(() => {
             setPreloadValue(true)
             checkAuth().then(data => {
                 profile.setIsAuth(true);
-            }, reason => {
                 setPreloadValue(false)
             }).finally(() => setPreloadValue(false))
         }
@@ -36,12 +35,6 @@ const App = observer(() => {
 
     return (
         <BrowserRouter>
-            {/*            <div className={styles.globalWrapper}>
-                <Header/>
-                <Aside/>
-                {preloadValue ? <div className={styles.loaderWrapper}><Loader/></div> : <Content/>}
-            </div>*/}
-
             <Layout className="layout">
                 <MyHeader/>
                 <Layout style={{ minHeight: '100vh' }}>
